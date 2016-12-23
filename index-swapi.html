@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app="swApp">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>SWAPI Test</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="style-swapi.css">
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<!--Angular.js Core-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
+	<!--script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-route.min.js"></script-->
+
+	<!--JS Controller-->
+	<script src="script-swapp.js" type="text/javascript"></script>
+</head>
+<body ng-controller="mainController">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-3">
+				<select ng-options="category for category in categories" ng-model="category.selected" ng-change="searchByCat(category.selected)" class="form-control"></select>
+			</div>
+			<div class="col-md-9">
+				<div class="form-group">
+    				<!--label for="search">Search</label-->
+    				<input type="text" class="form-control" id="search" placeholder="Start typing for searching" ng-focus="listActivate()" ng-model="something.name">
+    				<select size="10" ng-options="item as item.name || item.title for item in items" ng-model="item.selected" ng-show="listActive" ng-blur="listDeactivate()" class="form-control" ng-click="selectPoint(item.selected, category.selected)"></select>
+  				</div>
+			</div>
+		</div>
+		<div class="row" ng-repeat="type in types">
+			<hr>
+			<div class="col-md-12">{{type}}</div>
+			<div class="item col-md-2" ng-repeat="component in set" ng-if="component.type === type">
+				{{component.item}}
+				<a href="" class="delete_Item" ng-click="deleteItem($index, component)">X</a>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>
